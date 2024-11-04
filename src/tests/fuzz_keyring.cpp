@@ -51,4 +51,8 @@ TEST_F(rnp_tests, test_fuzz_keyring)
 
     data = file_to_vec(DATA_PATH "timeout-6140201111519232");
     assert_int_equal(keyring_LLVMFuzzerTestOneInput(data.data(), data.size()), 0);
+
+    /* Issue 376786414 : __clang_call_terminate pgp::SlhdsaKeyMaterial::parse */
+    data = file_to_vec(DATA_PATH "abrt-6281117100998656");
+    assert_int_equal(keyring_LLVMFuzzerTestOneInput(data.data(), data.size()), 0);
 }
